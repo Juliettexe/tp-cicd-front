@@ -35,3 +35,11 @@ jobs:
 
       - name: Run Type Check
         run: npm run typecheck
+  deploy:
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Render Deploy (Front)
+        run: |
+          curl -X POST "$RENDER_FRONT_HOOK"
